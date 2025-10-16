@@ -83,9 +83,9 @@ class ResidualQuantizer(nn.Module):
         
         for quantizer in self.quantizers:
             q, loss, indices = quantizer(residual)
-            quantized += q
-            residual -= q
-            total_loss += loss
+            quantized = quantized + q
+            residual = residual - q
+            total_loss = total_loss + loss
             all_indices.append(indices)
         
         return quantized, total_loss, all_indices
